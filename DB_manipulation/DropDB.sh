@@ -1,15 +1,21 @@
 #!/bin/bash
-read -p "Please Enter your database name: " DB_name 
+read -p "Please Enter your database name: " DB_drop_name 
 
-if [[ -d ~/DataBase/$DB_name ]]; then
-    read "Are you sure you want to delete this Database? y/n" sure 
-    if [[ $sure=y ]] ; then
-    rm -r $DB_name
-    echo "The database $DB_name is deleted  "
-    else 
-        echo "okay"
-    fi 
+if [[ -d ~/DataBase/$DB_drop_name ]]; then
+    read -p  "Are you sure you want to delete this Database? y/n :" sure 
+    case $sure in 
+    [Yy]* )
+        rm -r ~/DataBase/$DB_drop_name 
+        echo "Database has been deleted "
+        ;;
+    [Nn]* )
+        echo "canceled "
+        ;;
+    * )
+        echo "please enter y or n only "
+        ;;
+    esac
 
 else 
-    echo "write the right db name "
+    echo "Database doesn't exist  "
 fi
