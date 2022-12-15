@@ -10,10 +10,10 @@ elif [[ $DB_name = "" ]]; then
 elif [[ $DB_name = " " ]]; then
     echo "space are not allowed please try again  "
 
-elif [[ $DB_name = [*./|\+_)(&^%$#@!~"'] ]]; then
+elif [[ $DB_name = ['./|\+_&^%$#@!~"'] ]]; then
     echo "special character are not allowed  "
 
 else 
-    mkdir ~/DataBase/$DB_name
+    mkdir ./DataBase/$DB_name
     echo "Database created "
 fi 
