@@ -14,6 +14,6 @@ elif [[ $DB_name = ['./|\+_&^%$#@!~"'] ]]; then
     echo "special character are not allowed  "
 
 else 
-    mkdir ./DataBase/$DB_name
+    mkdir ~/DataBase/$DB_name
     echo "Database created "
 fi 
