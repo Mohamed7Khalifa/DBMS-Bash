@@ -11,7 +11,7 @@ elif [[ $DB_name = *" "* ]]; then
     echo "space are not allowed please try again  "
 
 elif [[ $DB_name = "!" ]]; then
-    echo "space are not allowed  again  "
+    echo "special character are not allowed  "
 
 else 
     mkdir ~/DataBase/$DB_name
