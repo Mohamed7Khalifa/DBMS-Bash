@@ -1,3 +1,4 @@
+#!/bin/bash
 read -p "Please Enter your database name: " DB_name 
 
 if [[ -d ~/DataBase/$DB_name ]] ; then
