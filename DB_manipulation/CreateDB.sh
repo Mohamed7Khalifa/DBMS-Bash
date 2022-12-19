@@ -12,6 +12,6 @@ elif [[ $DB_name =~ [0-9] ]]; then
     echo "numbers are not allowed please try again  "
 
 else 
-    mkdir ~/DataBase/$DB_name
+    mkdir -p ~/DataBase/$DB_name
     echo "Database created "
 fi 
