@@ -2,11 +2,10 @@
 function metaData(){
     echo "U need to insert the meta data of the table"
     read -p "insert the number of columns : " columnsNum
-    while [[ $columnsNum =~ [0-9] || $columnsNum =~ *[0-9] ]] 
+    while [[ $columnsNum != [0-9] || $columnsNum != *[0-9] ]] 
     do 
         read -p 'insert valid input' columnsNum
     done
-    primaryKey=''
     metaData_structure='field|type|key'
     counter=1
     while [[ $counter -le $columnsNum ]] 
@@ -19,7 +18,7 @@ function metaData(){
                 case $type in
                 int )
                 columnType='int'
-                break;
+                break;git config pull.rebase false
                 ;;
                 varchar )
                 columnType='varchar'
@@ -30,22 +29,22 @@ function metaData(){
                 esac
                 done
             if [[ $counter == 1 ]] ; then
-                echo "Make primary key [y/n]"
-                    select input in y n
+                echo "Make primary key "
+                    select input in yes no
                     do
-                        case $input in
-                            y)
-                            primaryKey='PK'
-                            metaData_structure+='\n'$columnName'|'$columnType'|'$primaryKey
-                            break;
-                            ;;
-                            n)
-                            metaData_structure+='\n'$columnName'|'$columnType'|'
-                            break;
-                            ;;
-                            *)
-                            echo 'Wrong input'
-                            ;;
+                    case $input in
+                        yes)
+                        primaryKey='PK'
+                        metaData_structure+='\n'$columnName'|'$columnType'|'$primaryKey
+                        break;
+                        ;;
+                        no)
+                        metaData_structure+='\n'$columnName'|'$columnType'|'
+                        break;
+                        ;;
+                        *)
+                        echo 'Wrong input'
+                        ;;
                         esac
                     done
             else
@@ -69,12 +68,10 @@ function metaData(){
     else
         echo "error in creating tables"
         ./main.sh
-    fi
-   
-    
+    fi 
 }
 
-read -p "Insert the table name : "  tbName
+read -p "enter table name : "  tbName
 if [[ $tbName =~ [' '] || $tbName =~ ['!@#$%^&*()_+'] || $tbName =~ [0-9] ]] ; then
     echo "enter the right name!!"
     ./Tables_manipulation/CreateTb.sh

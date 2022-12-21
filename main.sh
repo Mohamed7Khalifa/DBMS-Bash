@@ -1,5 +1,4 @@
 #!/usr/bin/bash
-cd ~/DBMS-Bash
 echo "Choose what u want sir!!"
 select input in Create_DB list_DB Connect_DB Drop_DB
 do 

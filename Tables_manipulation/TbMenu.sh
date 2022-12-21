@@ -1,12 +1,12 @@
 #!/usr/bin/bash
-read -p "Insert the table name : "  DB_name
-
+read -p "Insert the Data base name : "  DB_name
 while [[ $DB_name =~ [' '] || $DB_name =~ ['!@#$%^&*()_+'] || $DB_name =~ [0-9] ]]
 do 
     read -p "enter valid name X( " DB_name
 done
 
 if [[ -d ~/DataBase/$DB_name ]] ; then
+    cd ~/DataBase/$DB_name
     select input in Create_Tb list_Tb Drop_Tb Insert_Tb Delete_Tb Select_TB Update_Tb
     do 
             case $input in 
@@ -46,7 +46,22 @@ if [[ -d ~/DataBase/$DB_name ]] ; then
 
 else
     echo "This Database doesn't exist!!"
-    
+    echo "Do u wanna create database"
+    select input in yes no
+    do
+        case $input in 
+            yes)
+            ./DB_manipulation/CreateDB.sh
+            ;;
+            no)
+            ./main.sh
+            ;;
+            *)
+            echo "wrong input X( "
+            ;;
+            esac
+    done
+    ./Tables_manipulation/TbMenu.sh 
 fi
 
 
