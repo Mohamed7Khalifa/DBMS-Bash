@@ -34,7 +34,7 @@ function metaData(){
                     select input in y n
                     do
                         case $input in
-                            y )
+                            y)
                             primaryKey='PK'
                             metaData_structure+='\n'$columnName'|'$columnType'|'$primaryKey
                             break;

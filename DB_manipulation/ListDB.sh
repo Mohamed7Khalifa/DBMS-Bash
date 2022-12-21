@@ -1,4 +1,4 @@
 echo "hello this the DataBase avilable: " 
 echo "---------------------------------"
-ls -l | grep ^d |cut -d " " -f 9
+ls -F ~/DataBase| grep "/" | cut -d / -f1
 echo "---------------------------------"

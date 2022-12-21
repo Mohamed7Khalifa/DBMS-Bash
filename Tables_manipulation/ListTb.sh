@@ -1,4 +1,4 @@
 echo "The available Tables are: "
 echo "---------------------------------"
-ls -F | grep -v "/"
+ls -F ~/DataBase/ | grep -v "/"
 echo "---------------------------------"
