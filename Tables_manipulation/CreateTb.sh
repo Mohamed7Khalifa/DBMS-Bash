@@ -6,9 +6,8 @@ function metaData(){
     do 
         read -p 'insert valid input' columnsNum
     done
-    separator='|'
     primaryKey=''
-    metaData_structure='field'$separator'type'$separator'key'
+    metaData_structure='field|type|key'
     counter=1
     while [[ $counter -le $columnsNum ]] 
         do
@@ -30,18 +29,18 @@ function metaData(){
                 echo 'wrong input sir!!'
                 esac
                 done
-            if [[ $primaryKey == '' ]] ; then
+            if [[ $counter == 1 ]] ; then
                 echo "Make primary key [y/n]"
                     select input in y n
                     do
                         case $input in
                             y )
                             primaryKey='PK'
-                            metaData_structure+='\n'$columnName$separator$columnType$separator$primaryKey
+                            metaData_structure+='\n'$columnName'|'$columnType'|'$primaryKey
                             break;
                             ;;
                             n)
-                            metaData_structure+='\n'$columnName$separator$columnType$separator''
+                            metaData_structure+='\n'$columnName'|'$columnType'|'
                             break;
                             ;;
                             *)
@@ -50,12 +49,12 @@ function metaData(){
                         esac
                     done
             else
-                metaData_structure+='\n'$columnName$separator$columnType$separator''
+                metaData_structure+='\n'$columnName'|'$columnType'|'
             fi
             if [[ $counter == $columnName ]] ; then
                 temp+=$columnName
             else
-                temp+=$columnName$separator
+                temp+=$columnName'|'
                 echo $temp
             fi
             (( counter++ ))
