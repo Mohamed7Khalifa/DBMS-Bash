@@ -2,13 +2,15 @@
 function metaData(){
     echo "U need to insert the meta data of the table"
     read -p "insert the number of columns : " columnsNum
-    if [[ $columnsNum =~ [0-9] || $columnsNum =~ *[0-9] ]] ; then
-        separator='|'
-        rSeparator="\n"
-        primaryKey=''
-        metaData_structure='field'$separator'type'$separator'key'
-        counter=1
-        while [[ $counter -le $columnsNum ]] 
+    while [[ $columnsNum =~ [0-9] || $columnsNum =~ *[0-9] ]] 
+    do 
+        read -p 'insert valid input' columnsNum
+    done
+    separator='|'
+    primaryKey=''
+    metaData_structure='field'$separator'type'$separator'key'
+    counter=1
+    while [[ $counter -le $columnsNum ]] 
         do
             echo "What is the name of column $counter : " 
             read columnName
@@ -35,11 +37,11 @@ function metaData(){
                         case $input in
                             y )
                             primaryKey='PK'
-                            metaData_structure+=$rSeparator$columnName$separator$columnType$separator$primaryKey
+                            metaData_structure+='\n'$columnName$separator$columnType$separator$primaryKey
                             break;
                             ;;
                             n)
-                            metaData_structure+=$rSeparator$columnName$separator$columnType$separator''
+                            metaData_structure+='\n'$columnName$separator$columnType$separator''
                             break;
                             ;;
                             *)
@@ -48,7 +50,7 @@ function metaData(){
                         esac
                     done
             else
-                metaData_structure+=$rSeparator$columnName$separator$columnType$separator''
+                metaData_structure+='\n'$columnName$separator$columnType$separator''
             fi
             if [[ $counter == $columnName ]] ; then
                 temp+=$columnName
@@ -58,21 +60,19 @@ function metaData(){
             fi
             (( counter++ ))
         done
-        touch .$1
-        echo -e $metaData_structure > .$1
-        touch -e $1
-        echo $temp > $1
-        if [[ $? == 0 ]] ; then
-            echo "Done XD"
-            ./main.sh
-        else
-            echo "error in creating tables"
-            ./main.sh
-        fi
+    touch .$1
+    echo -e $metaData_structure > .$1
+    touch -e $1
+    echo $temp > $1
+    if [[ $? == 0 ]] ; then
+        echo "Done XD"
+        ./main.sh
     else
-        echo 'wrong input sir'
-        ./Tables_manipulation/CreateTb.sh
+        echo "error in creating tables"
+        ./main.sh
     fi
+   
+    
 }
 
 read -p "Insert the table name : "  tbName
