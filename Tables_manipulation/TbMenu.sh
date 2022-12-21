@@ -1,7 +1,10 @@
 #!/usr/bin/bash
-if [[ $DB_name =~ [' '] || $DB_name =~ ['!@#$%^&*()_+'] || $DB_name =~ [0-9] ]] ; then
-    echo "Enter the right name of data base"
-fi
+read -p "Insert the table name : "  DB_name
+
+while [[ $DB_name =~ [' '] || $DB_name =~ ['!@#$%^&*()_+'] || $DB_name =~ [0-9] ]]
+do 
+    read -p "enter valid name X( " DB_name
+done
 
 if [[ -d ~/DataBase/$DB_name ]] ; then
     select input in Create_Tb list_Tb Drop_Tb Insert_Tb Delete_Tb Select_TB Update_Tb
@@ -40,6 +43,7 @@ if [[ -d ~/DataBase/$DB_name ]] ; then
             ;;
             esac
     done
+
 else
     echo "This Database doesn't exist!!"
     
