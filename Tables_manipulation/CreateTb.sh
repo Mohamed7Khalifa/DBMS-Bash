@@ -6,7 +6,10 @@ else
     if [[ -f ~/DataBase/$tbName ]] ; then
         echo "the database is already created !!"
     else
-        echo "done!!"
         touch $tbName
+        echo "done!!"
     fi
 fi
+function metaData(){
+    
+}

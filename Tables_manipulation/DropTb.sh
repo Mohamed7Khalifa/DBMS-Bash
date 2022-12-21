@@ -1,12 +1,21 @@
-#!/usr/bin/bash
-read -p "Insert the table name : "  tbName
-if [[ $tbName =~ [' '] || $tbName =~ ['!@#$%^&*()_+'] || $tbName =~ [0-9]]] ; then
-    echo "enter the right name!!"
-else
-    if [[ -f ~/DataBase/$tbName ]] ; then
-        rm ~/DataBase/$tbName
-        echo "the table is droped !!"
-    else
-        echo "the table is not exist"
-    fi
+#!/bin/bash
+read -p "Please Enter your Table name: " tbName
+
+if [[ -d ~/DataBase/$tbName ]]; then
+    read -p  "Are you sure you want to delete this Table? y/n : " sure 
+    case $sure in 
+    [Yy]* )
+        rm  ~/DataBase/$tbName 
+        echo "Table has been deleted "
+        ;;
+    [Nn]* )
+        echo "canceled "
+        ;;
+    * )
+        echo "please enter y or n only "
+        ;;
+    esac
+
+else 
+    echo "Table doesn't exist  "
 fi

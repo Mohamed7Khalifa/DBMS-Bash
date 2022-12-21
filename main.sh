@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-
+echo "Choose what u want sir!!"
 select input in Create_DB list_DB Connect_DB Drop_DB
 do 
     case $input in 
@@ -16,11 +16,13 @@ do
         ./DB_manipulation/DropDB.sh
     ;;
     Connect_DB )
-        echo "Connect DB" 
+        echo "Connect DB"
         ./Tables_manipulation/TbMenu.sh 
     ;;
     *)
         echo "Wrong input"
+        echo " "
+        ./main.sh
     ;;
     esac
 done
