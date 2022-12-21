@@ -11,30 +11,31 @@ if [[ -d ~/DataBase/$DB_name ]] ; then
             case $input in 
             Create_Tb )
                 echo "Create_Tb"
-                
+                ./CreateTb.sh
             ;;
             list_Tb )
                 echo "list_Tb"
-                
+                ./ListTb.sh
             ;;
             Drop_Tb )
                 echo "Drop_Tb"
+                ./DropTb.sh
             ;;
             Insert_Tb )
                 echo "Insert_Tb"
-                
+                ./Insert.sh
             ;;
             Delete_Tb )
                 echo "Delete_Tb"
-                
+                ./Delete.sh
             ;;
             Select_TB )
                 echo "Select_TB"
-                
+                ./Select.sh
             ;;
             Update_Tb )
                 echo "Update_Tb"
-                
+                ./Update.sh
             ;;
             *)
                 echo "Wrong input"
