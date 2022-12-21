@@ -2,7 +2,7 @@
 function metaData(){
     echo "U need to insert the meta data of the table"
     read -p "insert the number of columns : " columnsNum
-    if [[ $columnName =~ *[0-9] ]]; then
+    if [[ $columnsNum =~ [0-9] || $columnsNum =~ *[0-9] ]] ; then
         separator='|'
         rSeparator="\n"
         primaryKey=''
@@ -59,8 +59,8 @@ function metaData(){
             (( counter++ ))
         done
         touch .$1
-        echo $metaData_structure > .$1
-        touch $1
+        echo -e $metaData_structure > .$1
+        touch -e $1
         echo $temp > $1
         if [[ $? == 0 ]] ; then
             echo "Done XD"
