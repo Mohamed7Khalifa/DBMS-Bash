@@ -2,7 +2,7 @@
 function metaData(){
     echo "U need to insert the meta data of the table"
     read -p "insert the number of columns : " columnsNum
-    if [[  ]]; then
+    if [[ $columnName =~ *[0-9] ]]; then
         separator='|'
         rSeparator="\n"
         primaryKey=''
@@ -71,6 +71,7 @@ function metaData(){
         fi
     else
         echo 'wrong input sir'
+        ./Tables_manipulation/CreateTb.sh
     fi
 }
 
