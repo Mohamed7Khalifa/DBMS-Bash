@@ -6,37 +6,37 @@ do
 done
 
 if [[ -d ~/DataBase/$DB_name ]] ; then
-    cd ~/DataBase/$DB_name
+    # cd ~/DataBase/$DB_name
     select input in Create_Tb list_Tb Drop_Tb Insert_Tb Delete_Tb Select_TB Update_Tb
     do 
             case $input in 
             Create_Tb )
                 echo "Create_Tb"
-                ./Tables_manipulation/CreateTb.sh
+                ./Tables_manipulation/CreateTb.sh $DB_name
             ;;
             list_Tb )
                 echo "list_Tb"
-                ./Tables_manipulation/ListTb.sh
+                ./Tables_manipulation/ListTb.sh $DB_name
             ;;
             Drop_Tb )
                 echo "Drop_Tb"
-                ./Tables_manipulation/DropTb.sh
+                ./Tables_manipulation/DropTb.sh $DB_name
             ;;
             Insert_Tb )
                 echo "Insert_Tb"
-                ./Tables_manipulation/Insert.sh
+                ./Tables_manipulation/Insert.sh $DB_name
             ;;
             Delete_Tb )
                 echo "Delete_Tb"
-                ./Tables_manipulation/Delete.sh  
+                ./Tables_manipulation/Delete.sh  $DB_name
             ;;
             Select_TB )
                 echo "Select_TB"
-                ./Tables_manipulation/Select.sh
+                ./Tables_manipulation/Select.sh $DB_name
             ;;
             Update_Tb )
                 echo "Update_Tb"
-                ./Tables_manipulation/Update.sh
+                ./Tables_manipulation/Update.sh $DB_name
             ;;
             *)
                 echo "Wrong input"

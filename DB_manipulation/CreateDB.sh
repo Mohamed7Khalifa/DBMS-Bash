@@ -6,8 +6,10 @@ do
     read DB_name 
 done
 if [[ -d ~/DataBase/$DB_name ]]; then
-    echo "The database $DB_name is already exist try diffrent name. " 
+    echo "The database $DB_name is already exist try diffrent name. "
+    ./main.sh
 else 
     mkdir -p ~/DataBase/$DB_name
     echo "Database created "
+    ./main.sh
 fi 

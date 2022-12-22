@@ -58,10 +58,10 @@ function metaData(){
             fi
             (( counter++ ))
         done
-    touch .$1
-    echo -e $metaData_structure > .$1
-    touch -e $1
-    echo $temp > $1
+    touch ~/DataBase/$DB_name/.$1
+    echo -e $metaData_structure > ~/DataBase/$DB_name/.$1
+    touch ~/DataBase/$DB_name/$1
+    echo -e $temp > ~/DataBase/$DB_name/$1
     if [[ $? == 0 ]] ; then
         echo "Done XD"
         ./main.sh
@@ -70,14 +70,16 @@ function metaData(){
         ./main.sh
     fi 
 }
-
+DB_name=$1
+echo $DB_name
 read -p "enter table name : "  tbName
 if [[ $tbName =~ [' '] || $tbName =~ ['!@#$%^&*()_+'] || $tbName =~ [0-9] ]] ; then
     echo "enter the right name!!"
     ./Tables_manipulation/CreateTb.sh
 else
-    if [[ -f ~/DataBase/$tbName ]] ; then
-        echo "the database is already created !!"
+    if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
+        echo "the table is already created !!"
+        ./main.sh
     else    
         metaData $tbName
     fi
