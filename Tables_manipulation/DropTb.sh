@@ -1,11 +1,11 @@
 #!/bin/bash
 read -p "Please Enter your Table name: " tbName
 
-if [[ -d ~/DataBase/$tbName ]]; then
+if [[ -d ~/DataBase/$DB_name/$tbName ]]; then
     read -p  "Are you sure you want to delete this Table? y/n : " sure 
     case $sure in 
      Yy]* )
-        rm -r ~/DataBase/$tbName 
+        rm -r ~/DataBase/$DB_name/$tbName 
         echo "Table has been deleted "
         ;;
     [Nn]* )
