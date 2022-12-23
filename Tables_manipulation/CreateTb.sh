@@ -18,7 +18,7 @@ function metaData(){
                 case $type in
                 int )
                 columnType='int'
-                break;git config pull.rebase false
+                break;
                 ;;
                 varchar )
                 columnType='varchar'
