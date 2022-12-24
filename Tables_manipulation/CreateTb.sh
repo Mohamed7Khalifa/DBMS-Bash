@@ -7,6 +7,7 @@ function metaData(){
         read -p 'insert valid input' columnsNum
     done
     metaData_structure='field|type|key'
+    primaryKey=''
     counter=1
     while [[ $counter -le $columnsNum ]] 
         do
@@ -28,7 +29,7 @@ function metaData(){
                 echo 'wrong input sir!!'
                 esac
                 done
-            if [[ $counter == 1 ]] ; then
+            if [[ $primaryKey == '' ]] ; then
                 echo "Make primary key "
                     select input in yes no
                     do
