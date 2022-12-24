@@ -21,8 +21,10 @@ function Select_column(){
             }
         }
      ' ~/DataBase/$DB_name/$tbName`
-     echo $field
-     awk -v column=$field '
+     if [[ $field = '' ]] ; then
+            echo "Ur column is not found"
+    else
+        awk -v column=$field '
         BEGIN{
             FS="|"
         }
@@ -30,6 +32,8 @@ function Select_column(){
             print "|",$column,"|"
         }
      ' ~/DataBase/$DB_name/$tbName
+     fi
+     
 }
 echo "choose the type of select u want " 
 select input in Select_All Select_column Select_with_Condition
@@ -39,8 +43,7 @@ do
         Select_All 
     ;;
   Select_column )
-        echo 'enter the name of column'
-        read columnName 
+        read -p 'enter the name of column : ' columnName 
         Select_column $columnName
     ;;
     Select_with_Condition )
