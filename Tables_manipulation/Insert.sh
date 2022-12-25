@@ -73,7 +73,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     done
     if [[ $? == 0 ]] ; then
         echo "Data Inserted Successfully"
-        ./main.sh
+        ./Tables_manipulation/TbMenu.sh
     else
         echo "Error Inserting Data into Table $tbName"
         ./Tables_manipulation/TbMenu.sh 
@@ -86,7 +86,7 @@ else
     do
         case $input in 
             yes)
-            ./Tables_manipulation/CreateTb.sh $1
+            ./Tables_manipulation/CreateTb.sh $DB_name
             ;;
             no)
             ./Tables_manipulation/TbMenu.sh

@@ -65,10 +65,10 @@ function metaData(){
     echo -e $temp > ~/DataBase/$DB_name/$1
     if [[ $? == 0 ]] ; then
         echo "Done XD"
-        ./main.sh
+        ./Tables_manipulation/TbMenu.sh
     else
         echo "error in creating tables"
-        ./main.sh
+        ./Tables_manipulation/TbMenu.sh
     fi 
 }
 DB_name=$1
