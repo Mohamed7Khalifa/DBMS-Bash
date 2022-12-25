@@ -35,6 +35,36 @@ function Select_column(){
      fi
      
 }
+Select_with_Condition(){
+    targetColumn=$1
+    field=`awk -v var="$targetColumn" '
+        BEGIN{
+            FS="|"
+        }
+        {
+            for(i=1;i<=NF;i++){
+                if($i==var){
+                    print i
+                }
+            }
+        }
+     ' ~/DataBase/$DB_name/$tbName`
+    targetValue=$2
+    awk -v column=$field -v target="$targetValue" '
+        BEGIN{
+            FS="|"
+        }
+        { 
+            print "------"
+            print $column
+            
+            if( $column == target ){
+                print $column
+            }
+        }
+     ' ~/DataBase/$DB_name/$tbName
+
+}
 echo "choose the type of select u want " 
 select input in Select_All Select_column Select_with_Condition
 do
@@ -47,8 +77,10 @@ do
         Select_column $columnName
     ;;
     Select_with_Condition )
-        read -p 'enter ur condition value : ' targetValue
-        sed -n '/$targetValue/p' ~/DataBase/$DB_name/$tbName
+        read -p 'enter the condition column : ' targetColumn
+        read -p 'enter the conition value : ' targetValue
+        Select_with_Condition $targetColumn $targetValue
+        # sed -n '/$targetValue/p' ~/DataBase/$DB_name/$tbName
     ;;
     * )
         echo "Wrong input"
