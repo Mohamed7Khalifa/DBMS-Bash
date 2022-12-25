@@ -21,7 +21,7 @@ function Select_column(){
             }
         }
      ' ~/DataBase/$DB_name/$tbName`
-     if [[ $field = '' ]] ; then
+    if [[ $field = '' ]] ; then
             echo "Ur column is not found"
     else
         awk -v column=$field '
@@ -49,21 +49,28 @@ Select_with_Condition(){
             }
         }
      ' ~/DataBase/$DB_name/$tbName`
-    targetValue=$2
-    awk -v column=$field -v target="$targetValue" '
+    if [[ $field = '' ]] ; then
+            echo "Ur column is not found"
+    else
+        targetValue=$2
+        values=`awk -v column=$field -v target="$targetValue" '
         BEGIN{
             FS="|"
         }
         { 
-            print "------"
-            print $column
-            
             if( $column == target ){
-                print $column
+                print $0
             }
         }
-     ' ~/DataBase/$DB_name/$tbName
-
+        ' ~/DataBase/$DB_name/$tbName`
+        if [[ $values = '' ]] ; then
+            echo "Ur condition value is not found"
+        else
+            echo 'the record = '
+            echo $values
+            sleep 1
+        fi
+    fi
 }
 echo "choose the type of select u want " 
 select input in Select_All Select_column Select_with_Condition
