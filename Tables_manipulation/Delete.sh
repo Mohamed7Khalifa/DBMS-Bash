@@ -1,5 +1,10 @@
 #!/usr/bin/bash
 DB_name=$1
+echo "The available Tables are: "
+echo "---------------------------------"
+ls -F ~/DataBase/$1/ | grep -v "/"
+echo "---------------------------------"
+sleep 1
 echo "Enter the name u want to delete"
 read tbName
 if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then

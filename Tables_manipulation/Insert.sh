@@ -1,13 +1,20 @@
 #!/usr/bin/bash
+DB_name=$1
+echo "The available Tables are: "
+echo "---------------------------------"
+ls -F ~/DataBase/$DB_name/ | grep -v "/"
+echo "---------------------------------"
+sleep 1
 echo 'insert the table name XD: '
 read tbName
+
 while [[ $tbName =~ [' '] || $tbName =~ ['!@#$%^&*()_+'] || $tbName =~ [0-9] ]]
 do
     echo 'invalid input X('
     echo 'Enter valid input : '
     read tbName
 done
-if [[ -f ~/DataBase/$1/$tbName ]] ; then
+if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     columnsNum=`awk '
         BEGIN{
             FS="|"
