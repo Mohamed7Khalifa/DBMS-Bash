@@ -1,4 +1,9 @@
 #!/usr/bin/bash
+echo "Available Data base: "
+echo "-----------------------------------"
+ls -F ~/DataBase| grep "/" | cut -d / -f1
+echo "-----------------------------------"
+
 read -p "Insert the Data base name : "  DB_name
 while [[ $DB_name =~ [' '] || $DB_name =~ ['!@#$%^&*()_+'] || $DB_name =~ [0-9] ]]
 do 
