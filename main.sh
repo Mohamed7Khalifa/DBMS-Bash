@@ -1,4 +1,6 @@
 #!/usr/bin/bash
+echo "Hint if u want to close the program press Cntrl+c X) "
+sleep 2
 echo "Choose what u want sir!!"
 select input in Create_DB list_DB Connect_DB Drop_DB
 do 
