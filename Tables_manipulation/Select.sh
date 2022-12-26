@@ -42,7 +42,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         fi
         
     }
-    Select_with_Condition(){
+    function Select_with_Condition(){
         targetColumn=$1
         field=`awk -v var="$targetColumn" '
             BEGIN{

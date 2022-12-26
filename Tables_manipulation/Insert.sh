@@ -27,7 +27,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     counter=2
     while [[ $counter -le $columnsNum ]]
     do
-    columnName=`awk '
+        columnName=`awk '
         BEGIN{
             FS="|"
         }
@@ -35,7 +35,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             if(NR=='$counter') print $1
         }
         ' ~/DataBase/$1/.$tbName`
-    columnType=`awk '
+        columnType=`awk '
         BEGIN{
             FS="|"
         }
@@ -43,7 +43,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             if(NR=='$counter') print $2
         }
         ' ~/DataBase/$1/.$tbName`
-    columnKey=`awk '
+        columnKey=`awk '
         BEGIN{
             FS="|"
         }
@@ -51,25 +51,24 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             if(NR=='$counter') print $3
         }
         ' ~/DataBase/$1/.$tbName`
-    # echo $columnName
-    # echo $columnType
-    # echo $columnKey
-    while [[ true ]]
-    do
-        read -p "Enter value of $columnName ($columnType) = "  input
-        if [[ columnType='int' && $input = +([0-9]) || columnType='varchar' && $input = +([a-zA-Z0-9]) ]] ;then
-            if [[ $counter == $columnsNum ]] ; then
-                echo $input >> ~/DataBase/$1/$tbName
+        # echo $columnName
+        # echo $columnType
+        # echo $columnKey
+        while [[ true ]]
+            do
+            read -p "Enter value of $columnName ($columnType) = "  input
+            if [[ columnType='int' && $input = +([0-9]) || columnType='varchar' && $input = +([a-zA-Z0-9]) ]] ;then
+                if [[ $counter == $columnsNum ]] ; then
+                    echo $input >> ~/DataBase/$1/$tbName
+                else
+                    echo -n $input'|' >> ~/DataBase/$1/$tbName 
+                fi
+                break
             else
-                echo -n $input'|' >> ~/DataBase/$1/$tbName 
+                echo "enter valid value X( "
             fi
-            break
-        else
-            echo "enter valid value X( "
-        fi
-    done
-    # echo -e "\n" >> ~/DataBase/$1/$tbName
-    (( counter++ ))
+            done
+        (( counter++ ))
     done
     if [[ $? == 0 ]] ; then
         echo "Data Inserted Successfully"
