@@ -5,7 +5,7 @@ ls -F ~/DataBase| grep "/" | cut -d / -f1
 echo "-----------------------------------"
 
 read -p "Insert the Data base name : "  DB_name
-while [[ $DB_name =~ [' '] || $DB_name =~ ['!@#$%^&*()_+'] || $DB_name =~ [0-9] ]]
+while [[ $DB_name =~ [' '] || $DB_name =~ ['!@#$%^&*()_+'] || $DB_name =~ ^[0-9] ]]
 do 
     read -p "enter valid name X( " DB_name
 done
