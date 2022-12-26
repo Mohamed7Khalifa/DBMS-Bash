@@ -44,6 +44,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
                 print "|",$column,"|"
             }
         ' ~/DataBase/$DB_name/$tbName
+            ./Tables_manipulation/TbMenu.sh
         sleep 1
         fi
     }
@@ -84,6 +85,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
                 echo 'the record = '
                 sed -n "1p" ~/DataBase/$DB_name/$tbName
                 echo $values
+                ./Tables_manipulation/TbMenu.sh
                 sleep 1
             fi
         fi
