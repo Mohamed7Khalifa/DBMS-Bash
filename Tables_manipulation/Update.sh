@@ -45,7 +45,6 @@ function getRecord(){
                 echo $targetLine
                 sed -i "${targetLine} d" ~/DataBase/$DB_name/$tbName
                 echo "done"
-                # return $targetLine
             fi
         fi
 }

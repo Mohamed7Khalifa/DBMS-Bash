@@ -74,6 +74,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
                 echo "Ur condition value is not found"
             else
                 echo 'the record = '
+                sed -n "1p" ~/DataBase/$DB_name/$tbName
                 echo $values
                 sleep 1
             fi
@@ -84,7 +85,8 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     do
         case $input in
         Select_All ) 
-            Select_All 
+            Select_All
+             
         ;;
     Select_column )
             read -p 'enter the name of column : ' columnName 

@@ -7,20 +7,60 @@ echo "---------------------------------"
 sleep 1
 echo "Enter the name u want to delete"
 read tbName
+function deleteRow(){
+    echo "this is the where section"
+        read -p 'enter the condition column : ' targetColumn
+        field=`awk -v var="$targetColumn" '
+            BEGIN{
+                FS="|"
+            }
+            {
+                for(i=1;i<=NF;i++){
+                    if($i==var){
+                        print i
+                    }
+                }
+            }
+        ' ~/DataBase/$DB_name/$tbName`
+        if [[ $field = '' ]] ; then
+            echo "Ur column is not found"
+            ./Tables_manipulation/TbMenu.sh
+        else
+            read -p 'enter the conition value : ' targetValue
+            targetLine=$(awk -v column=$field -v target="$targetValue" '
+            BEGIN{
+                FS="|"
+                
+            }
+            { 
+                if( $column == target ){
+                    printf NR
+                    exit
+                }
+            }
+            ' ~/DataBase/$DB_name/$tbName)
+            if [[ $targetLine = '' ]] ; then
+                echo "Ur condition is not found"
+                ./Tables_manipulation/TbMenu.sh
+            else
+                echo $targetLine
+                sed -i "${targetLine} d" ~/DataBase/$DB_name/$tbName
+                echo "Done X))"
+            fi
+        fi
+}
 if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     echo "Do u wanna delete all or specific row"
     select input in Delete_ALL Delete_Row
     do
         case $input in
         Delete_ALL )
-            sed -i '1,$d' ~/DataBase/$DB_name/$tbName
+            sed -i '2,$d' ~/DataBase/$DB_name/$tbName
             echo 'delete all done Successfully!!'
             ./Tables_manipulation/TbMenu.sh 
         ;;
         Delete_Row )
-            read -p 'enter ur ur condition value : ' targetValue
-            sed -i '1!{/$targetValue/d;}' ~/DataBase/$DB_name/$tbName
-            echo 'Done X)) '
+            deleteRow
             ./Tables_manipulation/TbMenu.sh 
         ;;
         *)
