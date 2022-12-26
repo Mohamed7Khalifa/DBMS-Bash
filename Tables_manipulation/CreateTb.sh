@@ -75,15 +75,17 @@ function metaData(){
 DB_name=$1
 echo $DB_name
 read -p "enter table name : "  tbName
-if [[ $tbName =~ [' '] || $tbName =~ ['!@#$%^&*()_+'] || $tbName =~ ^[0-9] ]] ; then
-    echo "enter the right name!!"
-    ./Tables_manipulation/CreateTb.sh
-else
-    if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
+while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
+do 
+    echo "enter valid name!!"
+    read tbName
+done
+
+if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         echo "the table is already created !!"
         ./main.sh
-    else    
+else    
         metaData $tbName
-    fi
 fi
+
 

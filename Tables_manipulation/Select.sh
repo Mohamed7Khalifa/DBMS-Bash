@@ -7,6 +7,11 @@ echo "---------------------------------"
 sleep 1
 echo 'insert the table name XD: '
 read tbName
+while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
+do
+    echo "enter valid name!!"
+    read tbName
+done
 if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     function Select_All(){
         awk '{

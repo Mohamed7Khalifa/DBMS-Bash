@@ -7,11 +7,9 @@ echo "---------------------------------"
 sleep 1
 echo 'insert the table name XD: '
 read tbName
-
-while [[ $tbName =~ [' '] || $tbName =~ ['!@#$%^&*()_+'] || $tbName =~ ^[0-9] ]]
+while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
 do
-    echo 'invalid input X('
-    echo 'Enter valid input : '
+    echo "enter valid name!!"
     read tbName
 done
 if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then

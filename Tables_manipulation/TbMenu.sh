@@ -5,13 +5,12 @@ ls -F ~/DataBase| grep "/" | cut -d / -f1
 echo "-----------------------------------"
 
 read -p "Insert the Data base name : "  DB_name
-while [[ $DB_name =~ [' '] || $DB_name =~ ['!@#$%^&*()_+'] || $DB_name =~ ^[0-9] ]]
-do 
-    read -p "enter valid name X( " DB_name
+while [[ ! $DB_name =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
+do
+    echo "enter valid name!!"
+    read DB_name
 done
-
 if [[ -d ~/DataBase/$DB_name ]] ; then
-    # cd ~/DataBase/$DB_name
     select input in Create_Tb list_Tb Drop_Tb Insert_Tb Delete_Tb Select_TB Update_Tb
     do 
             case $input in 

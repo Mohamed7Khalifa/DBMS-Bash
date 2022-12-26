@@ -7,6 +7,11 @@ echo "---------------------------------"
 sleep 1
 echo "Enter the name u want to delete"
 read tbName
+while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
+do
+    echo "enter valid name!!"
+    read tbName
+done
 function deleteRow(){
     echo "this is the where section"
         read -p 'enter the condition column : ' targetColumn
