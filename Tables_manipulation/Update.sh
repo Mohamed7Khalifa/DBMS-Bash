@@ -45,7 +45,6 @@ function getRecord(){
                 echo $targetLine
                 sed -i "${targetLine} d" ~/DataBase/$DB_name/$tbName
                 echo "done"
-                # return $targetLine
             fi
         fi
 }
@@ -108,9 +107,10 @@ function insertRecord(){
         ./Tables_manipulation/TbMenu.sh 
     fi
 }
-while [[ $tbName =~ [' '] || $tbName =~ ['!@#$%^&*()_+'] || $tbName =~ ^[0-9] ]]
-do
-    read -p "enter valid name : " tbName
+while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
+do 
+    echo "enter valid name!!"
+    read tbName
 done
 if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     getRecord

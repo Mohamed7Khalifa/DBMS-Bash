@@ -7,6 +7,11 @@ echo "---------------------------------"
 sleep 1
 echo 'insert the table name XD: '
 read tbName
+while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
+do
+    echo "enter valid name!!"
+    read tbName
+done
 if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     function Select_All(){
         awk '{
@@ -29,6 +34,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         ' ~/DataBase/$DB_name/$tbName`
         if [[ $field = '' ]] ; then
                 echo "Ur column is not found"
+                ./Tables_manipulation/TbMenu.sh
         else
             awk -v column=$field '
             BEGIN{
@@ -40,7 +46,6 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         ' ~/DataBase/$DB_name/$tbName
         sleep 1
         fi
-        
     }
     function Select_with_Condition(){
         targetColumn=$1
@@ -58,6 +63,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         ' ~/DataBase/$DB_name/$tbName`
         if [[ $field = '' ]] ; then
                 echo "Ur column is not found"
+                ./Tables_manipulation/TbMenu.sh
         else
             targetValue=$2
             values=`awk -v column=$field -v target="$targetValue" '
@@ -72,8 +78,11 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             ' ~/DataBase/$DB_name/$tbName`
             if [[ $values = '' ]] ; then
                 echo "Ur condition value is not found"
+                ./Tables_manipulation/TbMenu.sh
+
             else
                 echo 'the record = '
+                sed -n "1p" ~/DataBase/$DB_name/$tbName
                 echo $values
                 sleep 1
             fi
@@ -84,9 +93,11 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     do
         case $input in
         Select_All ) 
-            Select_All 
+            Select_All
+        ./Tables_manipulation/TbMenu.sh
+             
         ;;
-    Select_column )
+        Select_column )
             read -p 'enter the name of column : ' columnName 
             Select_column $columnName
         ;;
