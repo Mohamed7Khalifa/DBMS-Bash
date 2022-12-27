@@ -4,9 +4,11 @@ read -p "enter table name : "  tbName
 function metaData(){
     echo "U need to insert the meta data of the table"
     read -p "insert the number of columns : " columnsNum
-    while [[ $columnsNum != [0-9] || $columnsNum != *[0-9] ]] 
+    while ! [[ $columnsNum = +([0-9]) ]] 
     do 
-        read -p 'insert valid input' columnsNum
+        echo'insert valid input'
+        read -p "insert the number of columns : " columnsNum
+
     done
     metaData_structure='field|type|key'
     primaryKey=''
@@ -20,15 +22,16 @@ function metaData(){
                 do
                 case $type in
                 int )
-                columnType='int'
-                break;
+                    columnType='int'
+                    break;
                 ;;
                 varchar )
-                columnType='varchar'
-                break;
+                    columnType='varchar'
+                    break;
                 ;;
                 *)
-                echo 'wrong input sir!!'
+                    echo 'wrong input sir!!'
+                ;;
                 esac
                 done
             if [[ $primaryKey == '' ]] ; then
