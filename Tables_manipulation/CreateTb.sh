@@ -6,7 +6,7 @@ function metaData(){
     read -p "Insert the number of columns : " columnsNum
     while ! [[ $columnsNum = +([0-9]) ]] 
     do 
-        echo'Insert valid input '
+        echo 'Insert valid input '
         read -p "Insert the number of columns : " columnsNum
 
     done
