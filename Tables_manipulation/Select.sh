@@ -145,7 +145,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             read -p 'enter the name of column : ' columnName 
             Select_column $columnName
         ;;
-        Select_Record_with_Condition )
+        Select_All_with_Condition )
             Select_All_with_Condition 
         ;;
         Select_Column_with_Condition )
