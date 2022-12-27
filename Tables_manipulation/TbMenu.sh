@@ -1,16 +1,16 @@
 #!/usr/bin/bash
 clear
-echo "Available Data base: "
+echo "Available Database: "
 echo "-----------------------------------"
-ls -F ~/DataBase| grep "/" | cut -d / -f1
+ls -F ./DataBase| grep "/" | cut -d / -f1
 echo "-----------------------------------"
-read -p "Insert the Data base name: "  DB_name
+read -p "Insert the Database name: "  DB_name
 while [[ ! $DB_name =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
 do
     echo "enter valid name!! "
     read DB_name
 done
-if [[ -d ~/DataBase/$DB_name ]] ; then
+if [[ -d ./DataBase/$DB_name ]] ; then
     select input in Create_Tb list_Tb Drop_Tb Insert_Tb Delete Select_TB Update_Tb Go_back
     do 
             case $input in 

@@ -1,4 +1,6 @@
 #!/usr/bin/bash
+clear
+echo "Create Table"
 DB_name=$1
 read -p "enter table name : "  tbName
 function metaData(){
@@ -12,8 +14,9 @@ function metaData(){
     done
     if [[ $columnsNum = 0 ]] ; then
         echo "U can't insert zero value"
-        sleep 2
-        ./Tables_manipulation/TbMenu.sh
+        echo "try agian"
+        sleep 1
+        ./Tables_manipulation/CreateTb.sh
     fi
     metaData_structure='field|type|key'
     primaryKey=''
@@ -69,12 +72,12 @@ function metaData(){
             fi
             (( counter++ ))
         done
-    touch ~/DataBase/$DB_name/.$1
-    echo -e $metaData_structure > ~/DataBase/$DB_name/.$1
-    touch ~/DataBase/$DB_name/$1
-    echo -e $temp > ~/DataBase/$DB_name/$1
+    touch ./DataBase/$DB_name/.$1
+    echo -e $metaData_structure > ./DataBase/$DB_name/.$1
+    touch ./DataBase/$DB_name/$1
+    echo -e $temp > ./DataBase/$DB_name/$1
     if [[ $? == 0 ]] ; then
-        echo "Done XD"
+        echo "Create table is done XD"
         sleep 0.5 
         ./Tables_manipulation/TbMenu.sh
     else
@@ -89,7 +92,7 @@ do
     read tbName
 done
 
-if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
+if [[ -f ./DataBase/$DB_name/$tbName ]] ; then
         echo "the table is already created !! "
         ./main.sh
 else    

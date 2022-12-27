@@ -3,7 +3,7 @@ clear
 DB_name=$1
 echo "The available Tables are: "
 echo "---------------------------------"
-ls -F ~/DataBase/$1/ | grep -v "/"
+ls -F ./DataBase/$1/ | grep -v "/"
 echo "---------------------------------"
 sleep 1
 echo "Enter the name u want to delete"
@@ -27,7 +27,7 @@ function deleteRow(){
                     }
                 }
             }
-        ' ~/DataBase/$DB_name/$tbName`
+        ' ./DataBase/$DB_name/$tbName`
         if [[ $field = '' ]] ; then
             echo "Your column isn't found "
             sleep 0.5
@@ -46,26 +46,26 @@ function deleteRow(){
                 }
                 }
             }
-            ' ~/DataBase/$DB_name/$tbName)
+            ' ./DataBase/$DB_name/$tbName)
             if [[ $targetLine = '' ]] ; then
                 echo "Your condition isn't found"
                 sleep 0.5
                 ./Tables_manipulation/TbMenu.sh
             else
                 # echo $targetLine
-                sed -i -e"${targetLine}d" ~/DataBase/$DB_name/$tbName
+                sed -i -e"${targetLine}d" ./DataBase/$DB_name/$tbName
                 echo "Done "
                 sleep 2
             fi
         fi
 }
-if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
+if [[ -f ./DataBase/$DB_name/$tbName ]] ; then
     echo "Do you want to delete all or specific row "
     select input in Delete_ALL Delete_Row
     do
         case $input in
         Delete_ALL )
-            sed -i '2,$d' ~/DataBase/$DB_name/$tbName
+            sed -i '2,$d' ./DataBase/$DB_name/$tbName
             echo 'Delete all done Successfully!! '
             sleep 0.5
             ./Tables_manipulation/TbMenu.sh 

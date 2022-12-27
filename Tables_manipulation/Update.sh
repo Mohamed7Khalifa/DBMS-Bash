@@ -1,8 +1,9 @@
-DB_name=$1
 clear
+DB_name=$1
+echo "-Update-"
 echo "The available Tables are: "
 echo "---------------------------------"
-ls -F ~/DataBase/$DB_name/ | grep -v "/"
+ls -F ./DataBase/$DB_name/ | grep -v "/"
 echo "---------------------------------"
 sleep 0.5
 read -p "Type the table name : " tbName
@@ -20,7 +21,7 @@ function getRecord(){
                     }
                 }
             }
-        ' ~/DataBase/$DB_name/$tbName`
+        ' ./DataBase/$DB_name/$tbName`
         if [[ $field = '' ]] ; then
             echo "Your column is not found "
             sleep 0.5
@@ -39,14 +40,14 @@ function getRecord(){
                 }
                 }
             }
-            ' ~/DataBase/$DB_name/$tbName)
+            ' ./DataBase/$DB_name/$tbName)
             if [[ $targetLine = '' ]] ; then
                 echo "Your condition is not found"
                 ./Tables_manipulation/TbMenu.sh
             else
                 insertRecord
                 echo $targetLine
-                sed -i "${targetLine} d" ~/DataBase/$DB_name/$tbName
+                sed -i "${targetLine} d" ./DataBase/$DB_name/$tbName
                 echo "done"
                 sleep 1
                 ./Tables_manipulation/TbMenu.sh
@@ -61,7 +62,7 @@ function insertRecord(){
         END{
             print NR
         }
-        ' ~/DataBase/$DB_name/.$tbName`
+        ' ./DataBase/$DB_name/.$tbName`
     counter=2
     while [[ $counter -le $columnsNum ]]
     do
@@ -72,7 +73,7 @@ function insertRecord(){
             {
                 if(NR=='$counter') print $1
             }
-            ' ~/DataBase/$DB_name/.$tbName`
+            ' ./DataBase/$DB_name/.$tbName`
             columnType=`awk '
                 BEGIN{
                     FS="|"
@@ -80,7 +81,7 @@ function insertRecord(){
                 {
                     if(NR=='$counter') print $2
                 }
-                ' ~/DataBase/$DB_name/.$tbName`
+                ' ./DataBase/$DB_name/.$tbName`
         columnKey=`awk '
             BEGIN{
                 FS="|"
@@ -88,7 +89,7 @@ function insertRecord(){
             {
                 if(NR=='$counter') print $3
             }
-            ' ~/DataBase/$DB_name/.$tbName`
+            ' ./DataBase/$DB_name/.$tbName`
         
         read -p "Enter value of $columnName ($columnType) = "  input
         while ! [[  $columnType = "int" && $input = +([0-9]) ||  $columnType = "varchar" &&  $input = +([a-zA-Z0-9])  ]]
@@ -98,9 +99,9 @@ function insertRecord(){
 
             done
         if [[ $counter == $columnsNum ]] ; then
-            echo $input >> ~/DataBase/$DB_name/$tbName
+            echo $input >> ./DataBase/$DB_name/$tbName
         else
-            echo -n $input'|' >> ~/DataBase/$DB_name/$tbName 
+            echo -n $input'|' >> ./DataBase/$DB_name/$tbName 
         fi
         (( counter++ ))
     done
@@ -117,7 +118,7 @@ do
     echo "Enter valid name!! "
     read tbName
 done
-if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
+if [[ -f ./DataBase/$DB_name/$tbName ]] ; then
     getRecord
 else
     echo "this table is not exist.  "

@@ -1,9 +1,10 @@
 #!/usr/bin/bash
 clear
+echo "-Select-"
 DB_name=$1
 echo "The available Tables are: "
 echo "---------------------------------"
-ls -F ~/DataBase/$DB_name/ | grep -v "/"
+ls -F ./DataBase/$DB_name/ | grep -v "/"
 echo "---------------------------------"
 
 echo 'Insert the table name: '
@@ -13,11 +14,11 @@ do
     echo "Enter valid name!! "
     read tbName
 done
-if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
+if [[ -f ./DataBase/$DB_name/$tbName ]] ; then
     function Select_All(){
         awk '{
             print $0
-        }' ~/DataBase/$DB_name/$tbName
+        }' ./DataBase/$DB_name/$tbName
         sleep 2
     }
     function Select_column(){
@@ -33,7 +34,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
                     }
                 }
             }
-        ' ~/DataBase/$DB_name/$tbName`
+        ' ./DataBase/$DB_name/$tbName`
         if [[ $field = '' ]] ; then
                 echo "Your column isn't found "
                 ./Tables_manipulation/TbMenu.sh
@@ -45,7 +46,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             {
                 print "|",$column,"|"
             }
-        ' ~/DataBase/$DB_name/$tbName
+        ' ./DataBase/$DB_name/$tbName
         sleep 2
         ./Tables_manipulation/TbMenu.sh
         fi
@@ -64,7 +65,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
                     }
                 }
             }
-        ' ~/DataBase/$DB_name/$tbName`
+        ' ./DataBase/$DB_name/$tbName`
         if [[ $field = '' ]] ; then
                 echo "Your column is not found "
                 sleep 2 
@@ -81,7 +82,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
                     print $0
                 }
             }
-            ' ~/DataBase/$DB_name/$tbName`
+            ' ./DataBase/$DB_name/$tbName`
             if [[ $values = '' ]] ; then
                 echo "Your condition value isn't found"
                 sleep 2 
@@ -89,7 +90,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
 
             else
                 echo 'the record = '
-                sed -n "1p" ~/DataBase/$DB_name/$tbName
+                sed -n "1p" ./DataBase/$DB_name/$tbName
                 echo $values
                 sleep 2
                 ./Tables_manipulation/TbMenu.sh
@@ -110,7 +111,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
                     }
                 }
             }
-        ' ~/DataBase/$DB_name/$tbName` 
+        ' ./DataBase/$DB_name/$tbName` 
         if [[ $field = '' ]] ; then
                 echo "Your column is not found "
                 sleep 2
@@ -119,7 +120,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             read -p "Enter the condition column " column
             read -p 'Enter the condition value: ' targetValue 
 
-            values=`grep -w $targetValue ~/DataBase/$DB_name/$tbName | cut -d "|" -f$field`
+            values=`grep -w $targetValue ./DataBase/$DB_name/$tbName | cut -d "|" -f$field`
 
             if [[ $values = '' ]] ; then
                 echo "Your condition value is not found "
@@ -128,7 +129,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
 
             else
                 echo 'The record = '
-                sed -n "1p" ~/DataBase/$DB_name/$tbName | cut -d "|" -f$field
+                sed -n "1p" ./DataBase/$DB_name/$tbName | cut -d "|" -f$field
                 echo $values
                 sleep 2
                 ./Tables_manipulation/TbMenu.sh

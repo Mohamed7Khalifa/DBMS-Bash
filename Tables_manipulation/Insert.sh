@@ -1,11 +1,11 @@
 #!/usr/bin/bash
 clear
 DB_name=$1
+echo "-Inset Values-"
 echo "The available Tables are: "
 echo "---------------------------------"
-ls -F ~/DataBase/$DB_name/ | grep -v "/"
+ls -F ./DataBase/$DB_name/ | grep -v "/"
 echo "---------------------------------"
-sleep 1
 echo 'Insert the table name : '
 read tbName
 while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
@@ -13,7 +13,7 @@ do
     echo "enter valid name!!"
     read tbName
 done
-if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
+if [[ -f ./DataBase/$DB_name/$tbName ]] ; then
     columnsNum=`awk '
         BEGIN{
             FS="|"
@@ -21,7 +21,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         END{
             print NR
         }
-        ' ~/DataBase/$1/.$tbName`
+        ' ./DataBase/$1/.$tbName`
     # echo $columnsNum
     counter=2
     while [[ $counter -le $columnsNum ]]
@@ -33,7 +33,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         {
             if(NR=='$counter') print $1
         }
-        ' ~/DataBase/$1/.$tbName`
+        ' ./DataBase/$1/.$tbName`
         columnType=`awk '
         BEGIN{
             FS="|"
@@ -41,7 +41,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         {
             if(NR=='$counter') print $2
         }
-        ' ~/DataBase/$1/.$tbName`
+        ' ./DataBase/$1/.$tbName`
         columnKey=`awk '
         BEGIN{
             FS="|"
@@ -49,7 +49,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         {
             if(NR=='$counter') print $3
         }
-        ' ~/DataBase/$1/.$tbName`
+        ' ./DataBase/$1/.$tbName`
         # echo $columnName
         # echo $columnType
         # echo $columnKey
@@ -61,9 +61,9 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
 
             done
         if [[ $counter == $columnsNum ]] ; then
-            echo $input >> ~/DataBase/$DB_name/$tbName
+            echo $input >> ./DataBase/$DB_name/$tbName
         else
-            echo -n $input'|' >> ~/DataBase/$DB_name/$tbName 
+            echo -n $input'|' >> ./DataBase/$DB_name/$tbName 
         fi
         (( counter++ ))
     done

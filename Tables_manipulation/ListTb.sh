@@ -1,7 +1,7 @@
 DB_name=$1
 echo "The available Tables are: "
 echo "---------------------------------"
-ls -F ~/DataBase/$DB_name/ | grep -v "/"
+ls -F ./DataBase/$DB_name/ | grep -v "/"
 echo "---------------------------------"
 sleep 2
 ./Tables_manipulation/TbMenu.sh
