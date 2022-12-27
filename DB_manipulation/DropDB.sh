@@ -1,6 +1,6 @@
 #!/bin/bash
 read -p "Please Enter your database name: " DB_drop_name 
-while [[ ! $DB_name =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
+while [[ ! $DB_drop_name =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
 do
     echo "enter valid name!!"
     read DB_name
