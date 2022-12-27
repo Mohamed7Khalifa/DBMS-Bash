@@ -47,7 +47,7 @@ function getRecord(){
                 echo $targetLine
                 sed -i "${targetLine} d" ~/DataBase/$DB_name/$tbName
                 echo "done"
-                sleep 0.5
+                sleep 1
                 ./Tables_manipulation/TbMenu.sh
             fi
         fi
@@ -64,30 +64,31 @@ function insertRecord(){
     counter=2
     while [[ $counter -le $columnsNum ]]
     do
-        columnName=`awk '
-        BEGIN{
-            FS="|"
-        }
-        {
-            if(NR=='$counter') print $1
-        }
-        ' ~/DataBase/$DB_name/.$tbName`
-        columnType=`awk '
-        BEGIN{
-            FS="|"
-        }
-        {
-            if(NR=='$counter') print $2
-        }
-        ' ~/DataBase/$DB_name/.$tbName`
+            columnName=`awk '
+            BEGIN{
+                FS="|"
+            }
+            {
+                if(NR=='$counter') print $1
+            }
+            ' ~/DataBase/$DB_name/.$tbName`
+            columnType=`awk '
+                BEGIN{
+                    FS="|"
+                }
+                {
+                    if(NR=='$counter') print $2
+                }
+                ' ~/DataBase/$DB_name/.$tbName`
         columnKey=`awk '
-        BEGIN{
-            FS="|"
-        }
-        {
-            if(NR=='$counter') print $3
-        }
-        ' ~/DataBase/$DB_name/.$tbName`
+            BEGIN{
+                FS="|"
+            }
+            {
+                if(NR=='$counter') print $3
+            }
+            ' ~/DataBase/$DB_name/.$tbName`
+        
         read -p "Enter value of $columnName ($columnType) = "  input
         while ! [[  $columnType = "int" && $input = +([0-9]) ||  $columnType = "varchar" &&  $input = +([a-zA-Z0-9])  ]]
             do
@@ -96,9 +97,9 @@ function insertRecord(){
 
             done
         if [[ $counter == $columnsNum ]] ; then
-            echo $input >> ~/DataBase/$1/$tbName
+            echo $input >> ~/DataBase/$DB_name/$tbName
         else
-            echo -n $input'|' >> ~/DataBase/$1/$tbName 
+            echo -n $input'|' >> ~/DataBase/$DB_name/$tbName 
         fi
         (( counter++ ))
     done

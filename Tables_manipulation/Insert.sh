@@ -61,9 +61,9 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
 
             done
         if [[ $counter == $columnsNum ]] ; then
-            echo $input >> ~/DataBase/$1/$tbName
+            echo $input >> ~/DataBase/$DB_name/$tbName
         else
-            echo -n $input'|' >> ~/DataBase/$1/$tbName 
+            echo -n $input'|' >> ~/DataBase/$DB_name/$tbName 
         fi
         (( counter++ ))
     done
