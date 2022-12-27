@@ -5,7 +5,7 @@ echo "---------------------------------"
 ls -F ~/DataBase/$DB_name/ | grep -v "/"
 echo "---------------------------------"
 sleep 0.5
-read -p "type the table name XD " tbName
+read -p "Type the table name : " tbName
 function getRecord(){
         echo "This is the where section "
         read -p 'Enter the condition column: ' targetColumn
