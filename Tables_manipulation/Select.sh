@@ -1,10 +1,11 @@
 #!/usr/bin/bash
+clear
 DB_name=$1
 echo "The available Tables are: "
 echo "---------------------------------"
 ls -F ~/DataBase/$DB_name/ | grep -v "/"
 echo "---------------------------------"
-sleep 1
+
 echo 'insert the table name XD: '
 read tbName
 while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
@@ -44,12 +45,13 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
                 print "|",$column,"|"
             }
         ' ~/DataBase/$DB_name/$tbName
-            ./Tables_manipulation/TbMenu.sh
-        sleep 1
+        sleep 0.5
+        ./Tables_manipulation/TbMenu.sh
         fi
     }
-    function Select_with_Condition(){
-        targetColumn=$1
+    function Select_All_with_Condition(){
+        # targetColumn=$1
+        read -p 'enter the condition column : ' targetColumn
         field=`awk -v var="$targetColumn" '
             BEGIN{
                 FS="|"
@@ -66,7 +68,8 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
                 echo "Ur column is not found"
                 ./Tables_manipulation/TbMenu.sh
         else
-            targetValue=$2
+            # targetValue=$2
+            read -p 'enter the conition value : ' targetValue
             values=`awk -v column=$field -v target="$targetValue" '
             BEGIN{
                 FS="|"
@@ -85,13 +88,52 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
                 echo 'the record = '
                 sed -n "1p" ~/DataBase/$DB_name/$tbName
                 echo $values
+                sleep 0.5
                 ./Tables_manipulation/TbMenu.sh
-                sleep 1
+            fi
+        fi
+    }
+    function Select_Column_with_Condition(){
+        # targetColumn=$1
+        read -p 'enter the output column name : ' targetColumn
+        field=`awk -v var="$targetColumn" '
+            BEGIN{
+                FS="|"
+            }
+            {
+                for(i=1;i<=NF;i++){
+                    if($i==var){
+                        print i
+                    }
+                }
+            }
+        ' ~/DataBase/$DB_name/$tbName` 
+        if [[ $field = '' ]] ; then
+                echo "Ur column is not found"
+                sleep 0.5
+                ./Tables_manipulation/TbMenu.sh
+        else
+            read -p "enter the condition column " column
+            read -p 'enter the condition value : ' targetValue 
+
+            values=`grep -w $targetValue ~/DataBase/$DB_name/$tbName | cut -d "|" -f$field`
+
+            if [[ $values = '' ]] ; then
+                echo "Ur condition value is not found"
+                sleep 0.5
+                ./Tables_manipulation/TbMenu.sh
+
+            else
+                echo 'the record = '
+                sed -n "1p" ~/DataBase/$DB_name/$tbName | cut -d "|" -f$field
+                echo $values
+                sleep 0.5
+                ./Tables_manipulation/TbMenu.sh
             fi
         fi
     }
     echo "choose the type of select u want " 
-    select input in Select_All Select_column Select_with_Condition
+    select input in Select_All Select_column Select_All_with_Condition Select_Column_with_Condition
     do
         case $input in
         Select_All ) 
@@ -103,11 +145,11 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             read -p 'enter the name of column : ' columnName 
             Select_column $columnName
         ;;
-        Select_with_Condition )
-            read -p 'enter the condition column : ' targetColumn
-            read -p 'enter the conition value : ' targetValue
-            Select_with_Condition $targetColumn $targetValue
-            # sed -n '/$targetValue/p' ~/DataBase/$DB_name/$tbName
+        Select_Record_with_Condition )
+            Select_All_with_Condition 
+        ;;
+        Select_Column_with_Condition )
+            Select_Column_with_Condition
         ;;
         * )
             echo "Wrong input"
@@ -117,7 +159,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     done
 else
     echo 'the table is not exists X('
-    sleep 2
+    sleep 0.5
     ./Tables_manipulation/TbMenu.sh
     
 fi
