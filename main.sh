@@ -1,16 +1,16 @@
 #!/usr/bin/bash
-echo "Hint if u want to close the program press Cntrl+c X) "
-sleep 2
+echo "Hint if u want to close the program press Cntrl+c "
+sleep 1
 echo "Choose what u want sir!!"
 select input in Create_DB list_DB Connect_DB Drop_DB
 do 
     case $input in 
     Create_DB )
-        echo "create DB"
+        echo "Create DB"
         ./DB_manipulation/CreateDB.sh
     ;;
     list_DB )
-        echo "list DB"
+        echo "List DB"
         ./DB_manipulation/ListDB.sh
     ;;
     Drop_DB )

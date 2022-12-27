@@ -43,7 +43,7 @@ if [[ -d ~/DataBase/$DB_name ]] ; then
                 ./Tables_manipulation/Update.sh $DB_name
             ;;
             Go_back )
-             ./Tables_manipulation/TbMenu.sh 
+                ./main.sh
             ;;
             *)
                 echo "Wrong input"

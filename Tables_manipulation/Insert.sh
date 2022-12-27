@@ -71,9 +71,11 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     done
     if [[ $? == 0 ]] ; then
         echo "Data Inserted Successfully"
+        sleep 0.5
         ./Tables_manipulation/TbMenu.sh
     else
         echo "Error Inserting Data into Table $tbName"
+        sleep 0.5
         ./Tables_manipulation/TbMenu.sh 
     fi
 

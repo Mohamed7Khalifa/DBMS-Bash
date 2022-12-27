@@ -4,18 +4,18 @@ echo "The available Tables are: "
 echo "---------------------------------"
 ls -F ~/DataBase/$DB_name/ | grep -v "/"
 echo "---------------------------------"
-sleep 1
+sleep 0.5
 read -p "type the table name XD " tbName
 function getRecord(){
         echo "this is the where section"
         read -p 'enter the condition column : ' targetColumn
-        field=`awk -v var="$targetColumn" '
+        field=`awk -v targetColumn="$targetColumn" '
             BEGIN{
                 FS="|"
             }
             {
                 for(i=1;i<=NF;i++){
-                    if($i==var){
+                    if($i==targetColumn){
                         print i
                     }
                 }
@@ -23,6 +23,7 @@ function getRecord(){
         ' ~/DataBase/$DB_name/$tbName`
         if [[ $field = '' ]] ; then
             echo "Ur column is not found"
+            sleep 0.5
             ./Tables_manipulation/TbMenu.sh
         else
             read -p 'enter the conition value : ' targetValue
@@ -46,6 +47,8 @@ function getRecord(){
                 echo $targetLine
                 sed -i "${targetLine} d" ~/DataBase/$DB_name/$tbName
                 echo "done"
+                sleep 0.5
+                ./Tables_manipulation/TbMenu.sh
             fi
         fi
 }
@@ -105,6 +108,7 @@ function insertRecord(){
         echo "Data Inserted Successfully"
     else
         echo "Error Inserting Data into Table $tbName"
+        sleep 0.5
         ./Tables_manipulation/TbMenu.sh 
     fi
 }
@@ -117,5 +121,6 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     getRecord
 else
     echo "this table is not exist X( "
+    sleep 0.5
     ./Tables_manipulation/TbMenu.sh
 fi

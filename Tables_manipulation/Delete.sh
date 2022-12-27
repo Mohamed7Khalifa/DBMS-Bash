@@ -30,6 +30,7 @@ function deleteRow(){
         ' ~/DataBase/$DB_name/$tbName`
         if [[ $field = '' ]] ; then
             echo "Ur column is not found"
+            sleep 0.5
             ./Tables_manipulation/TbMenu.sh
         else
             read -p 'enter the conition value : ' targetValue
@@ -47,9 +48,10 @@ function deleteRow(){
             ' ~/DataBase/$DB_name/$tbName)
             if [[ $targetLine = '' ]] ; then
                 echo "Ur condition is not found"
+                sleep 0.5
                 ./Tables_manipulation/TbMenu.sh
             else
-                echo $targetLine
+                # echo $targetLine
                 sed -i "${targetLine} d" ~/DataBase/$DB_name/$tbName
                 echo "Done X))"
             fi
@@ -63,10 +65,12 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         Delete_ALL )
             sed -i '2,$d' ~/DataBase/$DB_name/$tbName
             echo 'delete all done Successfully!!'
+            sleep 0.5
             ./Tables_manipulation/TbMenu.sh 
         ;;
         Delete_Row )
             deleteRow
+            sleep 0.5
             ./Tables_manipulation/TbMenu.sh 
         ;;
         *)

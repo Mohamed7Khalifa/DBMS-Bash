@@ -45,11 +45,11 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
                 print "|",$column,"|"
             }
         ' ~/DataBase/$DB_name/$tbName
+        sleep 0.5
         ./Tables_manipulation/TbMenu.sh
-        sleep 1
         fi
     }
-    function Select_with_Condition(){
+    function Select_All_with_Condition(){
         # targetColumn=$1
         read -p 'enter the condition column : ' targetColumn
         field=`awk -v var="$targetColumn" '
@@ -88,8 +88,8 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
                 echo 'the record = '
                 sed -n "1p" ~/DataBase/$DB_name/$tbName
                 echo $values
+                sleep 0.5
                 ./Tables_manipulation/TbMenu.sh
-                sleep 1
             fi
         fi
     }
@@ -110,6 +110,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         ' ~/DataBase/$DB_name/$tbName` 
         if [[ $field = '' ]] ; then
                 echo "Ur column is not found"
+                sleep 0.5
                 ./Tables_manipulation/TbMenu.sh
         else
             read -p "enter the condition column " column
@@ -119,19 +120,20 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
 
             if [[ $values = '' ]] ; then
                 echo "Ur condition value is not found"
+                sleep 0.5
                 ./Tables_manipulation/TbMenu.sh
 
             else
-                # echo 'the record = '
+                echo 'the record = '
                 sed -n "1p" ~/DataBase/$DB_name/$tbName | cut -d "|" -f$field
                 echo $values
+                sleep 0.5
                 ./Tables_manipulation/TbMenu.sh
-                sleep 1
             fi
         fi
     }
     echo "choose the type of select u want " 
-    select input in Select_All Select_column Select_Record_with_Condition Select_Column_with_Condition
+    select input in Select_All Select_column Select_All_with_Condition Select_Column_with_Condition
     do
         case $input in
         Select_All ) 
@@ -144,8 +146,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             Select_column $columnName
         ;;
         Select_Record_with_Condition )
-            Select_with_Condition 
-            # sed -n '/$targetValue/p' ~/DataBase/$DB_name/$tbName
+            Select_All_with_Condition 
         ;;
         Select_Column_with_Condition )
             Select_Column_with_Condition
@@ -158,7 +159,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     done
 else
     echo 'the table is not exists X('
-    sleep 2
+    sleep 0.5
     ./Tables_manipulation/TbMenu.sh
     
 fi

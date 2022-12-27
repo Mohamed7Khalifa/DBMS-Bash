@@ -1,4 +1,6 @@
 #!/usr/bin/bash
+DB_name=$1
+read -p "enter table name : "  tbName
 function metaData(){
     echo "U need to insert the meta data of the table"
     read -p "insert the number of columns : " columnsNum
@@ -51,7 +53,7 @@ function metaData(){
             else
                 metaData_structure+='\n'$columnName'|'$columnType'|'
             fi
-            if [[ $counter == $columnName ]] ; then
+            if [[ $counter == $columnsNum ]] ; then
                 temp+=$columnName
             else
                 temp+=$columnName'|'
@@ -71,9 +73,6 @@ function metaData(){
         ./Tables_manipulation/TbMenu.sh
     fi 
 }
-DB_name=$1
-echo $DB_name
-read -p "enter table name : "  tbName
 while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
 do 
     echo "enter valid name!!"
