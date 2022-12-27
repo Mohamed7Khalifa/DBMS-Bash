@@ -88,20 +88,18 @@ function insertRecord(){
             if(NR=='$counter') print $3
         }
         ' ~/DataBase/$DB_name/.$tbName`
-    while [[ true ]]
-        do
-            read -p "Enter value of $columnName ($columnType) = "  input
-            if [[ $columnType = 'int' && $input =~ +([0-9]) || $columnType = 'varchar' && $input = +([a-zA-Z0-9]) ]] ;then
-                if [[ $counter == $columnsNum ]] ; then
-                    echo $input >> ~/DataBase/$DB_name/$tbName
-                else
-                    echo -n $input'|' >> ~/DataBase/$DB_name/$tbName 
-                fi
-                break
-            else
+        read -p "Enter value of $columnName ($columnType) = "  input
+        while ! [[  $columnType = "int" && $input = +([0-9]) ||  $columnType = "varchar" &&  $input = +([a-zA-Z0-9])  ]]
+            do
                 echo "enter valid value X( "
-            fi
-        done
+                read -p "Enter value of $columnName ($columnType) = "  input
+
+            done
+        if [[ $counter == $columnsNum ]] ; then
+            echo $input >> ~/DataBase/$1/$tbName
+        else
+            echo -n $input'|' >> ~/DataBase/$1/$tbName 
+        fi
         (( counter++ ))
     done
     if [[ $? == 0 ]] ; then

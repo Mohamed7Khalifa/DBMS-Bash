@@ -53,20 +53,18 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         # echo $columnName
         # echo $columnType
         # echo $columnKey
-        while [[ true ]]
+        read -p "Enter value of $columnName ($columnType) = "  input
+        while ! [[  $columnType = "int" && $input = +([0-9]) ||  $columnType = "varchar" &&  $input = +([a-zA-Z0-9])  ]]
             do
-            read -p "Enter value of $columnName ($columnType) = "  input
-            if [[ $columnType = 'int' && $input =~ +([0-9]) || $columnType = 'varchar' && $input = +([a-zA-Z0-9]) ]] ;then
-                if [[ $counter == $columnsNum ]] ; then
-                    echo $input >> ~/DataBase/$1/$tbName
-                else
-                    echo -n $input'|' >> ~/DataBase/$1/$tbName 
-                fi
-                break
-            else
                 echo "enter valid value X( "
-            fi
+                read -p "Enter value of $columnName ($columnType) = "  input
+
             done
+        if [[ $counter == $columnsNum ]] ; then
+            echo $input >> ~/DataBase/$1/$tbName
+        else
+            echo -n $input'|' >> ~/DataBase/$1/$tbName 
+        fi
         (( counter++ ))
     done
     if [[ $? == 0 ]] ; then
