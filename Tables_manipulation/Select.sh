@@ -17,7 +17,8 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     function Select_All(){
         awk '{
             print $0
-        }' ~/DataBase/$DB_name/.$tbName
+        }' ~/DataBase/$DB_name/$tbName
+        sleep 2
     }
     function Select_column(){
         targetValue=$1
@@ -45,7 +46,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
                 print "|",$column,"|"
             }
         ' ~/DataBase/$DB_name/$tbName
-        sleep 0.5
+        sleep 2
         ./Tables_manipulation/TbMenu.sh
         fi
     }
@@ -66,6 +67,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         ' ~/DataBase/$DB_name/$tbName`
         if [[ $field = '' ]] ; then
                 echo "Your column is not found "
+                sleep 2 
                 ./Tables_manipulation/TbMenu.sh
         else
             # targetValue=$2
@@ -82,13 +84,14 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             ' ~/DataBase/$DB_name/$tbName`
             if [[ $values = '' ]] ; then
                 echo "Your condition value isn't found"
+                sleep 2 
                 ./Tables_manipulation/TbMenu.sh
 
             else
                 echo 'the record = '
                 sed -n "1p" ~/DataBase/$DB_name/$tbName
                 echo $values
-                sleep 0.5
+                sleep 2
                 ./Tables_manipulation/TbMenu.sh
             fi
         fi
@@ -110,7 +113,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         ' ~/DataBase/$DB_name/$tbName` 
         if [[ $field = '' ]] ; then
                 echo "Your column is not found "
-                sleep 0.5
+                sleep 2
                 ./Tables_manipulation/TbMenu.sh
         else
             read -p "Enter the condition column " column
@@ -120,14 +123,14 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
 
             if [[ $values = '' ]] ; then
                 echo "Your condition value is not found "
-                sleep 0.5
+                sleep 2
                 ./Tables_manipulation/TbMenu.sh
 
             else
                 echo 'The record = '
                 sed -n "1p" ~/DataBase/$DB_name/$tbName | cut -d "|" -f$field
                 echo $values
-                sleep 0.5
+                sleep 2
                 ./Tables_manipulation/TbMenu.sh
             fi
         fi
@@ -138,6 +141,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         case $input in
         Select_All ) 
             Select_All
+            
         ./Tables_manipulation/TbMenu.sh
              
         ;;
@@ -159,7 +163,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     done
 else
     echo "The table isn't exists. "
-    sleep 0.5
+    sleep 2
     ./Tables_manipulation/TbMenu.sh
     
 fi
