@@ -3,7 +3,6 @@ echo "Available Data base: "
 echo "-----------------------------------"
 ls -F ~/DataBase| grep "/" | cut -d / -f1
 echo "-----------------------------------"
-
 read -p "Insert the Data base name : "  DB_name
 while [[ ! $DB_name =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
 do
@@ -11,7 +10,7 @@ do
     read DB_name
 done
 if [[ -d ~/DataBase/$DB_name ]] ; then
-    select input in Create_Tb list_Tb Drop_Tb Insert_Tb Delete_Tb Select_TB Update_Tb
+    select input in Create_Tb list_Tb Drop_Tb Insert_Tb Delete_Tb Select_TB Update_Tb Go_back
     do 
             case $input in 
             Create_Tb )
@@ -41,6 +40,9 @@ if [[ -d ~/DataBase/$DB_name ]] ; then
             Update_Tb )
                 echo "Update_Tb"
                 ./Tables_manipulation/Update.sh $DB_name
+            ;;
+            Go_back ))
+             ./Tables_manipulation/TbMenu.sh 
             ;;
             *)
                 echo "Wrong input"
