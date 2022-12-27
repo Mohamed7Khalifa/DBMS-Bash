@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 echo "Hint if u want to close the program press Cntrl+c "
 sleep 0.5
-echo "Choose what u want sir!!"
+echo "Choose what u want sir!! "
 select input in Create_DB list_DB Connect_DB Drop_DB
 do 
     case $input in 
@@ -22,7 +22,7 @@ do
         ./Tables_manipulation/TbMenu.sh 
     ;;
     *)
-        echo "Wrong input"
+        echo "Wrong input "
         echo " "
         ./main.sh
     ;;

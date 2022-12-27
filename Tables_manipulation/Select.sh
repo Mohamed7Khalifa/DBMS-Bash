@@ -6,11 +6,11 @@ echo "---------------------------------"
 ls -F ~/DataBase/$DB_name/ | grep -v "/"
 echo "---------------------------------"
 
-echo 'insert the table name XD: '
+echo 'Insert the table name: '
 read tbName
 while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
 do
-    echo "enter valid name!!"
+    echo "Enter valid name!! "
     read tbName
 done
 if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
@@ -34,7 +34,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             }
         ' ~/DataBase/$DB_name/$tbName`
         if [[ $field = '' ]] ; then
-                echo "Ur column is not found"
+                echo "Your column isn't found "
                 ./Tables_manipulation/TbMenu.sh
         else
             awk -v column=$field '
@@ -51,7 +51,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     }
     function Select_All_with_Condition(){
         # targetColumn=$1
-        read -p 'enter the condition column : ' targetColumn
+        read -p 'Enter the condition column: ' targetColumn
         field=`awk -v var="$targetColumn" '
             BEGIN{
                 FS="|"
@@ -65,11 +65,11 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             }
         ' ~/DataBase/$DB_name/$tbName`
         if [[ $field = '' ]] ; then
-                echo "Ur column is not found"
+                echo "Your column is not found "
                 ./Tables_manipulation/TbMenu.sh
         else
             # targetValue=$2
-            read -p 'enter the conition value : ' targetValue
+            read -p 'Enter the conition value: ' targetValue
             values=`awk -v column=$field -v target="$targetValue" '
             BEGIN{
                 FS="|"
@@ -81,7 +81,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             }
             ' ~/DataBase/$DB_name/$tbName`
             if [[ $values = '' ]] ; then
-                echo "Ur condition value is not found"
+                echo "Your condition value isn't found"
                 ./Tables_manipulation/TbMenu.sh
 
             else
@@ -95,7 +95,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     }
     function Select_Column_with_Condition(){
         # targetColumn=$1
-        read -p 'enter the output column name : ' targetColumn
+        read -p 'Enter the output column name: ' targetColumn
         field=`awk -v var="$targetColumn" '
             BEGIN{
                 FS="|"
@@ -109,22 +109,22 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             }
         ' ~/DataBase/$DB_name/$tbName` 
         if [[ $field = '' ]] ; then
-                echo "Ur column is not found"
+                echo "Your column is not found "
                 sleep 0.5
                 ./Tables_manipulation/TbMenu.sh
         else
-            read -p "enter the condition column " column
-            read -p 'enter the condition value : ' targetValue 
+            read -p "Enter the condition column " column
+            read -p 'Enter the condition value: ' targetValue 
 
             values=`grep -w $targetValue ~/DataBase/$DB_name/$tbName | cut -d "|" -f$field`
 
             if [[ $values = '' ]] ; then
-                echo "Ur condition value is not found"
+                echo "Your condition value is not found "
                 sleep 0.5
                 ./Tables_manipulation/TbMenu.sh
 
             else
-                echo 'the record = '
+                echo 'The record = '
                 sed -n "1p" ~/DataBase/$DB_name/$tbName | cut -d "|" -f$field
                 echo $values
                 sleep 0.5
@@ -132,7 +132,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             fi
         fi
     }
-    echo "choose the type of select u want " 
+    echo "Choose the type of select you want " 
     select input in Select_All Select_column Select_All_with_Condition Select_Column_with_Condition
     do
         case $input in
@@ -142,7 +142,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
              
         ;;
         Select_column )
-            read -p 'enter the name of column : ' columnName 
+            read -p 'Enter the name of column : ' columnName 
             Select_column $columnName
         ;;
         Select_All_with_Condition )
@@ -152,13 +152,13 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
             Select_Column_with_Condition
         ;;
         * )
-            echo "Wrong input"
+            echo "Wrong input "
             ./Tables_manipulation/Select.sh
         ;;
         esac 
     done
 else
-    echo 'the table is not exists X('
+    echo "The table isn't exists. "
     sleep 0.5
     ./Tables_manipulation/TbMenu.sh
     

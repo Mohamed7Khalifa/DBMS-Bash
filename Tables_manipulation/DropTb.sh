@@ -8,7 +8,7 @@ echo "---------------------------------"
 read -p "Please Enter your Table name: " tbName
 while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
 do
-    echo "enter valid name!!"
+    echo "Enter valid name!! "
     read tbName
 done
 if [[ -f ~/DataBase/$DB_name/$tbName ]]; then
@@ -22,12 +22,12 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]]; then
 
         ;;
     [Nn]* )
-        echo "canceled"
+        echo "canceled "
         ./Tables_manipulation/TbMenu.sh
 
         ;;
     * )
-        echo "please enter y or n only "
+        echo "Please enter y or n only "
         ;;
     esac
 

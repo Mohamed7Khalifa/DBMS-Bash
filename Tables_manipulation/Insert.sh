@@ -6,7 +6,7 @@ echo "---------------------------------"
 ls -F ~/DataBase/$DB_name/ | grep -v "/"
 echo "---------------------------------"
 sleep 1
-echo 'insert the table name XD: '
+echo 'Insert the table name : '
 read tbName
 while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
 do
@@ -56,7 +56,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         read -p "Enter value of $columnName ($columnType) = "  input
         while ! [[  $columnType = "int" && $input = +([0-9]) ||  $columnType = "varchar" &&  $input = +([a-zA-Z0-9])  ]]
             do
-                echo "enter valid value X( "
+                echo "Enter valid value !! "
                 read -p "Enter value of $columnName ($columnType) = "  input
 
             done
@@ -68,18 +68,18 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         (( counter++ ))
     done
     if [[ $? == 0 ]] ; then
-        echo "Data Inserted Successfully"
+        echo "Data Inserted Successfully "
         sleep 0.5
         ./Tables_manipulation/TbMenu.sh
     else
-        echo "Error Inserting Data into Table $tbName"
+        echo "Error Inserting Data into Table $tbName "
         sleep 0.5
         ./Tables_manipulation/TbMenu.sh 
     fi
 
 else
-    echo 'sorry this table is not exist X('
-    echo "Do u wanna create table"
+    echo 'Sorry this table is not exist. '
+    echo "Do you want to  create table"
     select input in yes no
     do
         case $input in 
@@ -90,7 +90,7 @@ else
             ./Tables_manipulation/TbMenu.sh
             ;;
             *)
-            echo "wrong input X( "
+            echo "Wrong input!! "
             ;;
             esac
     done

@@ -4,10 +4,10 @@ echo "Available Data base: "
 echo "-----------------------------------"
 ls -F ~/DataBase| grep "/" | cut -d / -f1
 echo "-----------------------------------"
-read -p "Insert the Data base name : "  DB_name
+read -p "Insert the Data base name: "  DB_name
 while [[ ! $DB_name =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
 do
-    echo "enter valid name!!"
+    echo "enter valid name!! "
     read DB_name
 done
 if [[ -d ~/DataBase/$DB_name ]] ; then
@@ -46,14 +46,14 @@ if [[ -d ~/DataBase/$DB_name ]] ; then
                 ./main.sh
             ;;
             *)
-                echo "Wrong input"
+                echo "Wrong input "
             ;;
             esac
     done
 
 else
-    echo "This Database doesn't exist!!"
-    echo "Do u wanna create database"
+    echo "This Database doesn't exist!! "
+    echo "Do you want to create a new database "
     select input in yes no
     do
         case $input in 
@@ -64,7 +64,7 @@ else
             ./main.sh
             ;;
             *)
-            echo "wrong input X( "
+            echo "wrong input!!  "
             ;;
             esac
     done

@@ -2,12 +2,12 @@
 DB_name=$1
 read -p "enter table name : "  tbName
 function metaData(){
-    echo "U need to insert the meta data of the table"
-    read -p "insert the number of columns : " columnsNum
+    echo "You need to insert the meta data of the table "
+    read -p "Insert the number of columns : " columnsNum
     while ! [[ $columnsNum = +([0-9]) ]] 
     do 
-        echo'insert valid input'
-        read -p "insert the number of columns : " columnsNum
+        echo'Insert valid input '
+        read -p "Insert the number of columns : " columnsNum
 
     done
     metaData_structure='field|type|key'
@@ -30,7 +30,7 @@ function metaData(){
                     break;
                 ;;
                 *)
-                    echo 'wrong input sir!!'
+                    echo 'wrong input sir!! '
                 ;;
                 esac
                 done
@@ -49,7 +49,7 @@ function metaData(){
                         break;
                         ;;
                         *)
-                        echo 'Wrong input'
+                        echo 'Wrong input '
                         ;;
                         esac
                     done
@@ -70,20 +70,22 @@ function metaData(){
     echo -e $temp > ~/DataBase/$DB_name/$1
     if [[ $? == 0 ]] ; then
         echo "Done XD"
+        sleep 0.5 
         ./Tables_manipulation/TbMenu.sh
     else
-        echo "error in creating tables"
+        echo "error in creating tables "
+        sleep 0.5
         ./Tables_manipulation/TbMenu.sh
     fi 
 }
 while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
 do 
-    echo "enter valid name!!"
+    echo "enter valid name!!: "
     read tbName
 done
 
 if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
-        echo "the table is already created !!"
+        echo "the table is already created !! "
         ./main.sh
 else    
         metaData $tbName

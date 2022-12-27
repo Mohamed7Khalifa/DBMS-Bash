@@ -7,8 +7,8 @@ echo "---------------------------------"
 sleep 0.5
 read -p "type the table name XD " tbName
 function getRecord(){
-        echo "this is the where section"
-        read -p 'enter the condition column : ' targetColumn
+        echo "This is the where section "
+        read -p 'Enter the condition column: ' targetColumn
         field=`awk -v targetColumn="$targetColumn" '
             BEGIN{
                 FS="|"
@@ -22,11 +22,11 @@ function getRecord(){
             }
         ' ~/DataBase/$DB_name/$tbName`
         if [[ $field = '' ]] ; then
-            echo "Ur column is not found"
+            echo "Your column is not found "
             sleep 0.5
             ./Tables_manipulation/TbMenu.sh
         else
-            read -p 'enter the conition value : ' targetValue
+            read -p 'Enter the conition value: ' targetValue
             targetLine=$(awk -v column=$field -v target="$targetValue" '
             BEGIN{
                 FS="|"
@@ -40,7 +40,7 @@ function getRecord(){
             }
             ' ~/DataBase/$DB_name/$tbName)
             if [[ $targetLine = '' ]] ; then
-                echo "Ur condition is not found"
+                echo "Your condition is not found"
                 ./Tables_manipulation/TbMenu.sh
             else
                 insertRecord
@@ -91,7 +91,7 @@ function insertRecord(){
         read -p "Enter value of $columnName ($columnType) = "  input
         while ! [[  $columnType = "int" && $input = +([0-9]) ||  $columnType = "varchar" &&  $input = +([a-zA-Z0-9])  ]]
             do
-                echo "enter valid value X( "
+                echo "Enter valid value X( "
                 read -p "Enter value of $columnName ($columnType) = "  input
 
             done
@@ -103,22 +103,22 @@ function insertRecord(){
         (( counter++ ))
     done
     if [[ $? == 0 ]] ; then
-        echo "Data Inserted Successfully"
+        echo "Data Inserted Successfully "
     else
-        echo "Error Inserting Data into Table $tbName"
+        echo "Error Inserting Data into Table $tbName "
         sleep 0.5
         ./Tables_manipulation/TbMenu.sh 
     fi
 }
 while [[ ! $tbName =~ ^([a-zA-Z\_])+([a-zA-Z0-9\_])*$ ]]
 do 
-    echo "enter valid name!!"
+    echo "Enter valid name!! "
     read tbName
 done
 if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
     getRecord
 else
-    echo "this table is not exist X( "
+    echo "this table is not exist.  "
     sleep 0.5
     ./Tables_manipulation/TbMenu.sh
 fi

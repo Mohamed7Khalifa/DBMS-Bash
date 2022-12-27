@@ -16,7 +16,7 @@ if [[ -d ~/DataBase/$DB_drop_name ]]; then
         echo "canceled "
         ;;
     * )
-        echo "please enter y or n only "
+        echo "Please enter y or n only "
         ;;
     esac
 
