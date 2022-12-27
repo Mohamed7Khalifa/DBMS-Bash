@@ -14,7 +14,6 @@ function metaData(){
             echo "What is the name of column $counter : " 
             read columnName
             echo "What is the type of column $columnName : " 
-            
                 select type in int varchar
                 do
                 case $type in

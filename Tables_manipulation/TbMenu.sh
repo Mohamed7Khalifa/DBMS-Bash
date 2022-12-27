@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+clear
 echo "Available Data base: "
 echo "-----------------------------------"
 ls -F ~/DataBase| grep "/" | cut -d / -f1
@@ -41,7 +42,7 @@ if [[ -d ~/DataBase/$DB_name ]] ; then
                 echo "Update_Tb"
                 ./Tables_manipulation/Update.sh $DB_name
             ;;
-            Go_back ))
+            Go_back )
              ./Tables_manipulation/TbMenu.sh 
             ;;
             *)

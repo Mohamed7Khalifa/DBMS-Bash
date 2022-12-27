@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+clear
 DB_name=$1
 echo "The available Tables are: "
 echo "---------------------------------"

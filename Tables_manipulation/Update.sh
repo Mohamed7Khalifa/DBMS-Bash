@@ -1,4 +1,5 @@
 DB_name=$1
+clear
 echo "The available Tables are: "
 echo "---------------------------------"
 ls -F ~/DataBase/$DB_name/ | grep -v "/"

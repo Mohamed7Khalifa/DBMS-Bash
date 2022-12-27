@@ -4,3 +4,4 @@ echo "---------------------------------"
 ls -F ~/DataBase/$DB_name/ | grep -v "/"
 echo "---------------------------------"
 sleep 1
+./Tables_manipulation/TbMenu.sh
