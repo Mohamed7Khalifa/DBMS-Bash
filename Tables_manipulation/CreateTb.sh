@@ -10,6 +10,11 @@ function metaData(){
         read -p "Insert the number of columns : " columnsNum
 
     done
+    if [[ $columnsNum = 0 ]] ; then
+        echo "U can't insert zero value"
+        sleep 2
+        ./Tables_manipulation/TbMenu.sh
+    fi
     metaData_structure='field|type|key'
     primaryKey=''
     counter=1

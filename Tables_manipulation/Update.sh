@@ -30,12 +30,13 @@ function getRecord(){
             targetLine=$(awk -v column=$field -v target="$targetValue" '
             BEGIN{
                 FS="|"
-                
             }
             { 
+                if (column!=1){
                 if( $column == target ){
                     printf NR
                     exit
+                }
                 }
             }
             ' ~/DataBase/$DB_name/$tbName)

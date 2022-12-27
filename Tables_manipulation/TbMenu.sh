@@ -11,7 +11,7 @@ do
     read DB_name
 done
 if [[ -d ~/DataBase/$DB_name ]] ; then
-    select input in Create_Tb list_Tb Drop_Tb Insert_Tb Delete_Tb Select_TB Update_Tb Go_back
+    select input in Create_Tb list_Tb Drop_Tb Insert_Tb Delete Select_TB Update_Tb Go_back
     do 
             case $input in 
             Create_Tb )
@@ -30,7 +30,7 @@ if [[ -d ~/DataBase/$DB_name ]] ; then
                 echo "Insert_Tb"
                 ./Tables_manipulation/Insert.sh $DB_name
             ;;
-            Delete_Tb )
+            Delete )
                 echo "Delete_Tb"
                 ./Tables_manipulation/Delete.sh  $DB_name
             ;;

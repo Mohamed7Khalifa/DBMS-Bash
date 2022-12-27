@@ -37,12 +37,13 @@ function deleteRow(){
             targetLine=$(awk -v column=$field -v target="$targetValue" '
             BEGIN{
                 FS="|"
-                
             }
             { 
+                if (column!=1){
                 if( $column == target ){
                     printf NR
                     exit
+                }
                 }
             }
             ' ~/DataBase/$DB_name/$tbName)
@@ -52,8 +53,9 @@ function deleteRow(){
                 ./Tables_manipulation/TbMenu.sh
             else
                 # echo $targetLine
-                sed -i "${targetLine} d" ~/DataBase/$DB_name/$tbName
-                echo "Done. "
+                sed -i -e"${targetLine}d" ~/DataBase/$DB_name/$tbName
+                echo "Done "
+                sleep 2
             fi
         fi
 }
