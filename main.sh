@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 echo "Hint if u want to close the program press Cntrl+c "
 sleep 0.5
-echo "Choose what u want sir!! "
+echo "Choose what you want :  "
 select input in Create_DB list_DB Connect_DB Drop_DB
 do 
     case $input in 
