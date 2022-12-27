@@ -56,7 +56,7 @@ if [[ -f ~/DataBase/$DB_name/$tbName ]] ; then
         while [[ true ]]
             do
             read -p "Enter value of $columnName ($columnType) = "  input
-            if [[ columnType='int' && $input = +([0-9]) || columnType='varchar' && $input = +([a-zA-Z0-9]) ]] ;then
+            if [[ $columnType = 'int' && $input =~ +([0-9]) || $columnType = 'varchar' && $input = +([a-zA-Z0-9]) ]] ;then
                 if [[ $counter == $columnsNum ]] ; then
                     echo $input >> ~/DataBase/$1/$tbName
                 else

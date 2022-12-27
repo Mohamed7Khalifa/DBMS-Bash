@@ -91,7 +91,7 @@ function insertRecord(){
     while [[ true ]]
         do
             read -p "Enter value of $columnName ($columnType) = "  input
-            if [[ columnType='int' && $input = +([0-9]) || columnType='varchar' && $input = +([a-zA-Z0-9]) ]] ;then
+            if [[ $columnType = 'int' && $input =~ +([0-9]) || $columnType = 'varchar' && $input = +([a-zA-Z0-9]) ]] ;then
                 if [[ $counter == $columnsNum ]] ; then
                     echo $input >> ~/DataBase/$DB_name/$tbName
                 else
